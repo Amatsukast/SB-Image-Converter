@@ -1,0 +1,36 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# テスト
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 設定ファイル（ユーザー固有）
+settings.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ビルド成果物
+dist/
+build/
+*.spec
+
+# バックアップ
+backups/
+
+# ログ
+*.log

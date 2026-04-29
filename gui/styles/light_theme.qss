@@ -1,0 +1,407 @@
+/* SB Image Converter - ライトテーマ */
+
+/* === グローバル設定 === */
+* {
+    font-family: "Yu Gothic UI", "Segoe UI", sans-serif;
+    font-size: 14px;
+    color: #495057;
+}
+
+QMainWindow, QWidget {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+/* === ツールバー === */
+Toolbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* === ボタン === */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #495057;
+}
+
+QPushButton:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+QPushButton:pressed {
+    background-color: #dee2e6;
+    border-color: #adb5bd;
+}
+
+QPushButton:disabled {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    border-color: #dee2e6;
+}
+
+/* ツールバーボタン（アイコンのみ） */
+QPushButton#menuButton,
+QPushButton#imageButton,
+QPushButton#folderButton,
+QPushButton#deleteButton,
+QPushButton#play_circleButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+}
+
+QPushButton#menuButton:hover,
+QPushButton#imageButton:hover,
+QPushButton#folderButton:hover,
+QPushButton#deleteButton:hover,
+QPushButton#play_circleButton:hover {
+    background-color: #e9ecef;
+}
+
+QPushButton#menuButton:pressed,
+QPushButton#imageButton:pressed,
+QPushButton#folderButton:pressed,
+QPushButton#deleteButton:pressed,
+QPushButton#play_circleButton:pressed {
+    background-color: #dee2e6;
+}
+
+/* === ラベル === */
+QLabel {
+    background-color: transparent;
+    color: #495057;
+}
+
+QLabel#sectionTitle {
+    color: #212529;
+}
+
+QLabel#placeholderText {
+    color: #adb5bd;
+}
+
+QLabel#noteLabel {
+    color: #6c757d;
+}
+
+QLabel#versionLabel {
+    color: #adb5bd;
+}
+
+/* === プログレスバー === */
+QProgressBar {
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    text-align: center;
+    color: #495057;
+    min-height: 6px;
+    max-height: 6px;
+}
+
+QProgressBar::chunk {
+    background-color: #14919b;
+    border-radius: 2px;
+}
+
+/* === スプリッター === */
+QSplitter::handle {
+    background-color: #dee2e6;
+    width: 2px;
+}
+
+QSplitter::handle:hover {
+    background-color: #adb5bd;
+}
+
+/* === スクロールバー === */
+QScrollBar:vertical {
+    background-color: #f8f9fa;
+    width: 12px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #adb5bd;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #6c757d;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal {
+    background-color: #f8f9fa;
+    height: 12px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #adb5bd;
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #6c757d;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+
+/* === コンボボックス === */
+QComboBox {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 50px 10px 12px;
+    color: #495057;
+    font-size: 15px;
+}
+
+QComboBox:hover {
+    border-color: #adb5bd;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: border;
+    subcontrol-position: center right;
+    width: 44px;
+    border-left: none;
+}
+
+QComboBox::down-arrow {
+    image: url(icons/arrow_drop_down.svg);
+    width: 32px;
+    height: 32px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    selection-background-color: #14919b;
+    selection-color: #ffffff;
+    color: #495057;
+    padding: 4px;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 8px 12px;
+    border: none;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #e9ecef;
+    border: none;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #14919b;
+    border: none;
+    outline: none;
+}
+
+/* === スピンボックス === */
+QSpinBox, QDoubleSpinBox {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #495057;
+}
+
+QSpinBox:hover, QDoubleSpinBox:hover {
+    border-color: #adb5bd;
+}
+
+/* === スライダー === */
+QSlider::groove:horizontal {
+    background-color: #dee2e6;
+    height: 6px;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background-color: #14919b;
+    width: 18px;
+    height: 18px;
+    margin: -6px 0;
+    border-radius: 9px;
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: #17a2ae;
+}
+
+QSlider::sub-page:horizontal {
+    background-color: #14919b;
+    border-radius: 3px;
+}
+
+QSlider::add-page:horizontal {
+    background-color: #dee2e6;
+    border-radius: 3px;
+}
+
+/* === ラインエディット === */
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #495057;
+}
+
+QLineEdit:hover {
+    border-color: #adb5bd;
+}
+
+QLineEdit:focus {
+    border-color: #14919b;
+}
+
+/* === チェックボックス === */
+QCheckBox {
+    spacing: 8px;
+    color: #495057;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #adb5bd;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #14919b;
+    border: 1px solid #14919b;
+}
+
+/* === ラジオボタン === */
+QRadioButton {
+    spacing: 8px;
+    color: #495057;
+}
+
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dee2e6;
+    border-radius: 9px;
+    background-color: #ffffff;
+}
+
+QRadioButton::indicator:hover {
+    border-color: #adb5bd;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #14919b;
+    border: 1px solid #14919b;
+}
+
+/* === ツリービュー（ファイル一覧） === */
+QTreeView {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    outline: none;  /* フォーカスの枠線を消す */
+}
+
+QTreeView::item {
+    padding: 10px 4px;  /* 行間調整 */
+    border: none;  /* セルの枠線を消す */
+}
+
+QTreeView::item:selected {
+    background-color: #14919b;
+    color: #ffffff;
+}
+
+QTreeView::item:selected:hover {
+    background-color: #14919b;  /* 選択状態ではホバーしても色を変えない */
+    color: #ffffff;
+}
+
+QTreeView::item:hover {
+    background-color: #e9ecef;  /* 非選択時の行全体のホバー */
+}
+
+QHeaderView::section {
+    background-color: #ffffff;
+    color: #495057;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+}
+
+QHeaderView::section:hover {
+    background-color: #e9ecef;
+}
+
+/* === メニュー === */
+QMenu {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 4px;
+    min-width: 280px;
+    icon-size: 32px;
+}
+
+QMenu::item {
+    background-color: transparent;
+    padding: 14px 20px;
+    border-radius: 4px;
+    color: #495057;
+    font-size: 18px;
+}
+
+QMenu::icon {
+    padding-left: 8px;
+}
+
+QMenu::item:selected {
+    background-color: #14919b;
+    color: #ffffff;
+}
+
+QMenu::item:disabled {
+    color: #adb5bd;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #dee2e6;
+    margin: 4px 8px;
+}
+
+/* === ツールチップ === */
+QToolTip {
+    background-color: #ffffff;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px;
+}

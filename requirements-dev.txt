@@ -1,0 +1,9 @@
+# Development and Testing Dependencies
+# Install with: pip install -r requirements-dev.txt
+
+# Testing
+pytest>=9.0.3
+pytest-cov>=7.1.0
+
+# Build & Distribution
+PyInstaller>=6.0.0

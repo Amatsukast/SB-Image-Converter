@@ -18,7 +18,7 @@ No installation required.
 
 - **OS**: Windows 10 or later (64-bit)
 - **RAM**: 4GB or more (recommended for processing large images)
-- **Disk Space**: ~100MB for the application
+- **Disk Space**: ~150MB for the application
 
 ## Overview
 

@@ -27,10 +27,8 @@ pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='SB Image Converter',
     debug=False,
     bootloader_ignore_signals=False,
@@ -46,4 +44,15 @@ exe = EXE(
     entitlements_file=None,
     icon='app_icon.ico',
     version='version_info.txt',
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='SB Image Converter',
 )

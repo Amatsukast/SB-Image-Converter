@@ -30,6 +30,7 @@ Thumbs.db
 # ビルド成果物
 dist/
 build/
+releases/
 
 # バックアップ
 backups/

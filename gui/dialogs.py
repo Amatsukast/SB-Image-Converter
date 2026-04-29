@@ -6,6 +6,7 @@
 
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QDesktopServices, QCursor
 from managers.translation_manager import get_translation_manager
 
 
@@ -208,3 +209,97 @@ class ResetConfirmDialog(QDialog):
         self.message.setText(self.tm.tr("dialog.reset.message"))
         self.no_button.setText(self.tm.tr("dialog.no"))
         self.yes_button.setText(self.tm.tr("dialog.yes"))
+
+
+class AboutDialog(QDialog):
+    """バージョン情報ダイアログ"""
+
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+        self.tm = get_translation_manager()
+        self._setup_ui()
+
+        # 言語切り替えに対応
+        self.tm.language_changed.connect(self.refresh_ui)
+
+    def _setup_ui(self) -> None:
+        """UI構築"""
+        self.setWindowTitle(self.tm.tr("dialog.about.title"))
+        self.setModal(True)
+        self.setFixedSize(500, 320)
+
+        layout = QVBoxLayout(self)
+        layout.setSpacing(15)
+        layout.setContentsMargins(30, 30, 30, 30)
+
+        # アプリ名
+        app_name = QLabel("SB Image Converter")
+        app_name.setAlignment(Qt.AlignCenter)
+        app_name.setStyleSheet("font-size: 20px; font-weight: bold;")
+        layout.addWidget(app_name)
+
+        # バージョン
+        self.version_label = QLabel(self.tm.tr("dialog.about.version"))
+        self.version_label.setAlignment(Qt.AlignCenter)
+        self.version_label.setStyleSheet("font-size: 14px; color: #666;")
+        layout.addWidget(self.version_label)
+
+        layout.addSpacing(10)
+
+        # 説明
+        self.description = QLabel(self.tm.tr("dialog.about.description"))
+        self.description.setAlignment(Qt.AlignCenter)
+        self.description.setStyleSheet("font-size: 13px;")
+        self.description.setWordWrap(True)
+        layout.addWidget(self.description)
+
+        layout.addSpacing(10)
+
+        # GitHubリンク
+        github_link = QLabel(
+            '<a href="https://github.com/Amatsukast/SB-Image-Converter" style="color: #0066cc;">GitHub Repository</a>'
+        )
+        github_link.setAlignment(Qt.AlignCenter)
+        github_link.setOpenExternalLinks(True)
+        github_link.setStyleSheet("font-size: 13px;")
+        github_link.setCursor(QCursor(Qt.PointingHandCursor))
+        layout.addWidget(github_link)
+
+        # ライセンス
+        self.license_label = QLabel(self.tm.tr("dialog.about.license"))
+        self.license_label.setAlignment(Qt.AlignCenter)
+        self.license_label.setStyleSheet("font-size: 12px; color: #666;")
+        layout.addWidget(self.license_label)
+
+        layout.addSpacing(5)
+
+        # 著者
+        self.author_label = QLabel(self.tm.tr("dialog.about.author"))
+        self.author_label.setAlignment(Qt.AlignCenter)
+        self.author_label.setStyleSheet("font-size: 12px; color: #666;")
+        layout.addWidget(self.author_label)
+
+        layout.addStretch()
+
+        # 閉じるボタン
+        button_layout = QHBoxLayout()
+        button_layout.setSpacing(10)
+
+        self.close_button = QPushButton(self.tm.tr("dialog.about.close"))
+        self.close_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.close_button.clicked.connect(self.accept)
+
+        button_layout.addStretch()
+        button_layout.addWidget(self.close_button)
+        button_layout.addStretch()
+
+        layout.addLayout(button_layout)
+
+    def refresh_ui(self) -> None:
+        """言語切り替え時のUI更新"""
+        self.setWindowTitle(self.tm.tr("dialog.about.title"))
+        self.version_label.setText(self.tm.tr("dialog.about.version"))
+        self.description.setText(self.tm.tr("dialog.about.description"))
+        self.license_label.setText(self.tm.tr("dialog.about.license"))
+        self.author_label.setText(self.tm.tr("dialog.about.author"))
+        self.close_button.setText(self.tm.tr("dialog.about.close"))

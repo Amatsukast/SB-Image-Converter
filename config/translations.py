@@ -167,7 +167,11 @@ TRANSLATIONS = {
         "dialog.clear_all.message": "すべてのファイルを削除しますか？",
         "dialog.output_folder.title": "出力先フォルダを選択",
         "dialog.about.title": "バージョン情報",
-        "dialog.about.message": "SB Image Converter\nVersion 1.0.0\n\nPySide6版",
+        "dialog.about.version": "Version 1.0.1",
+        "dialog.about.description": "シンプルで効率的なバッチ画像変換ツール",
+        "dialog.about.license": "License: GNU General Public License v3.0",
+        "dialog.about.author": "© 2026 Amatsukast",
+        "dialog.about.close": "閉じる",
         # ========================================
         # Status Messages
         # ========================================
@@ -389,7 +393,11 @@ TRANSLATIONS = {
         "dialog.clear_all.message": "Remove all files?",
         "dialog.output_folder.title": "Select Output Folder",
         "dialog.about.title": "About",
-        "dialog.about.message": "SB Image Converter\nVersion 1.0.0\n\nPySide6 Edition",
+        "dialog.about.version": "Version 1.0.1",
+        "dialog.about.description": "A simple and efficient batch image converter",
+        "dialog.about.license": "License: GNU General Public License v3.0",
+        "dialog.about.author": "© 2026 Amatsukast",
+        "dialog.about.close": "Close",
         # ========================================
         # Status Messages
         # ========================================

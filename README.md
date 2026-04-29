@@ -77,7 +77,7 @@ Choose from 4 flexible resize options:
 ## Settings
 
 <p align="center">
-  <img src="screenshots/02_settings_light.png" alt="Settings Panel" width="700">
+  <img src="screenshots/02_settings_light.png" alt="Settings Panel" width="800">
 </p>
 
 Access settings via the menu button (☰) in the top-left corner.

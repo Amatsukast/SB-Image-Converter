@@ -7,20 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.1] - 2026-04-30
 
+### Added
+
+- Added Windows version info resource (displays version 1.0.1 in exe properties)
+- Added custom About dialog with unified design, GitHub link, and license information
+
 ### Fixed
+
 - Fixed QComboBox dropdown arrow icon not displaying in exe build
 - Fixed QComboBox dropdown arrow icon color not adapting to theme (Light/Dark)
 - Fixed settings.json saved to incorrect location in exe build (now saves to portable data/ folder)
 - Fixed QSS icon paths not resolving correctly in PyInstaller exe environment
 
 ### Changed
+
 - Optimized exe build size from 251MB to 53MB by removing unnecessary dependencies
 - Settings and theme-generated files now stored in data/ folder for better organization
 - Arrow icon SVG files now generated at runtime with theme-appropriate colors
+- Updated About dialog to match other dialogs' design style
+- Simplified version display in main window from "Version 1.0.0 (PySide6)" to "v1.0.1"
 
 ## [1.0.0] - 2026-04-30
 
 ### Added
+
 - Initial release of SB Image Converter
 - Batch image conversion with drag & drop support
 - Format support: WebP, PNG, JPG, BMP

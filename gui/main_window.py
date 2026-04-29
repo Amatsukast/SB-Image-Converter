@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.splitter.setStretchFactor(1, 0)  # 右は固定幅維持
 
         # 下部エリア
-        self.version_label = QLabel("Version 1.0.0 (PySide6)")
+        self.version_label = QLabel("v1.0.1")
         self.version_label.setAlignment(Qt.AlignLeft)
         self.version_label.setObjectName("versionLabel")
         self.version_label.setStyleSheet("font-size: 10px; padding: 5px;")
@@ -267,11 +267,10 @@ class MainWindow(QMainWindow):
 
     def _on_about_clicked(self) -> None:
         """バージョン情報クリック"""
-        from PySide6.QtWidgets import QMessageBox
+        from gui.dialogs import AboutDialog
 
-        QMessageBox.information(
-            self, self.tm.tr("dialog.about.title"), self.tm.tr("dialog.about.message")
-        )
+        dialog = AboutDialog(self)
+        dialog.exec()
 
     def _on_settings_save(self) -> None:
         """設定画面: 保存して閉じる"""

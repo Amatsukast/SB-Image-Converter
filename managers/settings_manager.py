@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 from dataclasses import dataclass, asdict
 from config.constants import (
@@ -51,7 +52,17 @@ class AppSettings:
 class SettingsManager:
     def __init__(self, settings_path: Path = None):
         if settings_path is None:
-            settings_path = Path(__file__).parent.parent / "data" / "settings.json"
+            # Check if running as exe (frozen)
+            if getattr(sys, "frozen", False):
+                # Running as exe: save to data folder next to exe (portable)
+                exe_dir = Path(sys.executable).parent
+                data_dir = exe_dir / "data"
+                data_dir.mkdir(parents=True, exist_ok=True)
+                settings_path = data_dir / "settings.json"
+            else:
+                # Running as script: save to data folder
+                settings_path = Path(__file__).parent.parent / "data" / "settings.json"
+                settings_path.parent.mkdir(parents=True, exist_ok=True)
         self.settings_path = settings_path
         self.settings = self.load()
 

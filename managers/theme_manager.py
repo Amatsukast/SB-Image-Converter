@@ -5,6 +5,7 @@ Centralized theme management for the application.
 Provides dynamic theme switching capabilities.
 """
 
+import sys
 from pathlib import Path
 from PySide6.QtCore import QObject, Signal, Qt
 from PySide6.QtGui import QGuiApplication, QPalette
@@ -93,7 +94,54 @@ class ThemeManager(QObject):
             qss_file = self._styles_dir / "dark_theme.qss"  # Fallback
 
         if qss_file.exists():
-            return qss_file.read_text(encoding="utf-8")
+            qss_content = qss_file.read_text(encoding="utf-8")
+
+            # Fix icon paths for exe (frozen) execution
+            if getattr(sys, "frozen", False):
+                # PyInstaller extracts resources to sys._MEIPASS temporary folder
+                base_path = Path(getattr(sys, "_MEIPASS", Path(sys.executable).parent))
+                icons_path = base_path / "icons"
+            else:
+                # Running as script
+                base_path = Path(__file__).parent.parent
+                icons_path = base_path / "icons"
+
+            # Replace relative paths with absolute paths (use forward slashes for Qt)
+            icons_path_str = str(icons_path).replace("\\", "/")
+            qss_content = qss_content.replace("url(icons/", f"url({icons_path_str}/")
+
+            # Fix SVG icon colors in QSS to match theme
+            # Replace hardcoded #e3e3e3 in arrow_drop_down.svg with theme color
+            icon_color = self.get_icon_color()
+            arrow_svg_path = icons_path / "arrow_drop_down.svg"
+            if arrow_svg_path.exists():
+                import re
+
+                arrow_svg_content = arrow_svg_path.read_text(encoding="utf-8")
+                # Replace fill color
+                arrow_svg_content = re.sub(
+                    r'fill="[^"]*"', f'fill="{icon_color}"', arrow_svg_content
+                )
+
+                # Write colored SVG to data folder (portable, consistent with settings.json)
+                if getattr(sys, 'frozen', False):
+                    # exe: save to data folder next to exe
+                    data_dir = Path(sys.executable).parent / "data"
+                else:
+                    # script: save to data folder in project
+                    data_dir = base_path / "data"
+
+                data_dir.mkdir(parents=True, exist_ok=True)
+                temp_arrow_path = data_dir / f"arrow_drop_down_{theme_code}.svg"
+                temp_arrow_path.write_text(arrow_svg_content, encoding="utf-8")
+
+                # Update QSS to use colored version
+                temp_arrow_str = str(temp_arrow_path).replace("\\", "/")
+                qss_content = qss_content.replace(
+                    f"{icons_path_str}/arrow_drop_down.svg", temp_arrow_str
+                )
+
+            return qss_content
         else:
             return ""
 

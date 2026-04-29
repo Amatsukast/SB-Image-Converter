@@ -13,6 +13,9 @@ htmlcov/
 
 # 設定ファイル（ユーザー固有）
 settings.json
+data/settings.json
+data/arrow_drop_down_dark.svg
+data/arrow_drop_down_light.svg
 
 # IDE
 .vscode/
@@ -27,7 +30,6 @@ Thumbs.db
 # ビルド成果物
 dist/
 build/
-*.spec
 
 # バックアップ
 backups/

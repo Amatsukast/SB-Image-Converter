@@ -9,7 +9,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
     QLabel,
-    QComboBox,
     QCheckBox,
     QSpinBox,
     QLineEdit,
@@ -18,12 +17,12 @@ from PySide6.QtWidgets import (
     QStackedWidget,
     QScrollArea,
     QFrame,
-    QSlider,
 )
 from PySide6.QtCore import Qt, Signal, QSize
 from core.icon_loader import IconLoader
 from managers.translation_manager import get_translation_manager
 from managers.theme_manager import get_theme_manager
+from gui.widgets import NoScrollComboBox, NoScrollSlider
 from config.constants import (
     RESIZE_MODE_RATIO,
     RESIZE_MODE_PIXELS,
@@ -154,7 +153,7 @@ class SettingsPanel(QWidget):
         header.addWidget(spinbox)
 
         # Slider
-        slider = QSlider(Qt.Horizontal)
+        slider = NoScrollSlider(Qt.Horizontal)
         slider.setRange(min_val, max_val)
         slider.setValue(default_val)
 
@@ -187,7 +186,7 @@ class SettingsPanel(QWidget):
         layout.setSpacing(0)
 
         # フォーマット選択
-        self.format_combo = QComboBox()
+        self.format_combo = NoScrollComboBox()
         self.format_combo.addItems(["WebP", "PNG", "JPG", "BMP"])
         self.format_combo.currentTextChanged.connect(self._on_format_changed)
         layout.addWidget(self.format_combo)
@@ -246,7 +245,7 @@ class SettingsPanel(QWidget):
         layout.addLayout(method_header)
 
         # スライダー
-        self.webp_method_slider = QSlider(Qt.Horizontal)
+        self.webp_method_slider = NoScrollSlider(Qt.Horizontal)
         self.webp_method_slider.setRange(0, 6)
         self.webp_method_slider.setValue(4)
         layout.addWidget(self.webp_method_slider)
@@ -340,7 +339,7 @@ class SettingsPanel(QWidget):
         self.jpg_subsample_label = QLabel(self.tm.tr("settings.jpg.subsampling"))
         self.jpg_subsample_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         subsample_section.addWidget(self.jpg_subsample_label)
-        self.jpg_subsample = QComboBox()
+        self.jpg_subsample = NoScrollComboBox()
         self.jpg_subsample.addItems(["4:4:4", "4:2:2", "4:2:0"])
         self.jpg_subsample.setCurrentText("4:2:2")
         subsample_section.addWidget(self.jpg_subsample)
@@ -397,7 +396,7 @@ class SettingsPanel(QWidget):
         self.resize_mode_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         detail_layout.addWidget(self.resize_mode_label)
         detail_layout.addSpacing(6)
-        self.resize_mode = QComboBox()
+        self.resize_mode = NoScrollComboBox()
         # リサイズモードの表示名を翻訳キー経由で設定
         self.resize_mode.addItem(
             self.tm.get_resize_mode_display(RESIZE_MODE_RATIO), RESIZE_MODE_RATIO

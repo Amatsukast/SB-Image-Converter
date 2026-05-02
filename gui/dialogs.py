@@ -43,11 +43,11 @@ class PauseDialog(QDialog):
         button_layout.setSpacing(10)
 
         self.resume_button = QPushButton(self.tm.tr("dialog.resume"))
-        self.resume_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.resume_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.resume_button.clicked.connect(self._on_resume)
 
         self.stop_button = QPushButton(self.tm.tr("dialog.stop"))
-        self.stop_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.stop_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.stop_button.clicked.connect(self._on_stop)
 
         button_layout.addWidget(self.resume_button)
@@ -110,11 +110,11 @@ class CloseConfirmDialog(QDialog):
         button_layout.setSpacing(10)
 
         self.cancel_button = QPushButton(self.tm.tr("dialog.cancel"))
-        self.cancel_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.cancel_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.cancel_button.clicked.connect(self._on_cancel)
 
         self.exit_button = QPushButton(self.tm.tr("dialog.exit"))
-        self.exit_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.exit_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.exit_button.clicked.connect(self._on_exit)
 
         button_layout.addWidget(self.cancel_button)
@@ -177,11 +177,11 @@ class ResetConfirmDialog(QDialog):
         button_layout.setSpacing(10)
 
         self.no_button = QPushButton(self.tm.tr("dialog.no"))
-        self.no_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.no_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.no_button.clicked.connect(self._on_no)
 
         self.yes_button = QPushButton(self.tm.tr("dialog.yes"))
-        self.yes_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.yes_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.yes_button.clicked.connect(self._on_yes)
 
         button_layout.addWidget(self.no_button)
@@ -286,7 +286,7 @@ class AboutDialog(QDialog):
         button_layout.setSpacing(10)
 
         self.close_button = QPushButton(self.tm.tr("dialog.about.close"))
-        self.close_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.close_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.close_button.clicked.connect(self.accept)
 
         button_layout.addStretch()

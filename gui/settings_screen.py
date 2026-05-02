@@ -9,7 +9,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
     QLabel,
-    QComboBox,
     QCheckBox,
     QRadioButton,
     QButtonGroup,
@@ -24,6 +23,7 @@ from core.icon_loader import IconLoader
 from managers.translation_manager import get_translation_manager
 from managers.theme_manager import get_theme_manager
 from config.constants import LANG_SYSTEM, LANG_JAPANESE, LANG_ENGLISH
+from gui.widgets import NoScrollComboBox
 
 
 def _create_section_title(text: str) -> QLabel:
@@ -154,7 +154,7 @@ class SettingsScreen(QWidget):
         self.language_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         layout.addWidget(self.language_label)
         layout.addSpacing(6)
-        self.language_combo = QComboBox()
+        self.language_combo = NoScrollComboBox()
         self.language_combo.addItem(
             self.tm.tr("settings_screen.language.system"), LANG_SYSTEM
         )
@@ -175,7 +175,7 @@ class SettingsScreen(QWidget):
         self.theme_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         layout.addWidget(self.theme_label)
         layout.addSpacing(6)
-        self.theme_combo = QComboBox()
+        self.theme_combo = NoScrollComboBox()
         self.theme_combo.addItem(self.tm.tr("settings_screen.theme.system"), "system")
         self.theme_combo.addItem(self.tm.tr("settings_screen.theme.light"), "light")
         self.theme_combo.addItem(self.tm.tr("settings_screen.theme.dark"), "dark")
@@ -412,7 +412,7 @@ class SettingsScreen(QWidget):
         self.reset_button = QPushButton(self.tm.tr("settings_screen.button.reset"))
         self.reset_button.setIcon(IconLoader.load("reset_settings", size=32))
         self.reset_button.setIconSize(QSize(32, 32))
-        self.reset_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.reset_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.reset_button.clicked.connect(self.reset_defaults_clicked.emit)
         layout.addWidget(self.reset_button)
 
@@ -422,7 +422,7 @@ class SettingsScreen(QWidget):
         self.cancel_button = QPushButton(self.tm.tr("settings_screen.button.cancel"))
         self.cancel_button.setIcon(IconLoader.load("close", size=32))
         self.cancel_button.setIconSize(QSize(32, 32))
-        self.cancel_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.cancel_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.cancel_button.clicked.connect(self.cancel_clicked.emit)
         layout.addWidget(self.cancel_button)
 
@@ -430,7 +430,7 @@ class SettingsScreen(QWidget):
         self.save_button = QPushButton(self.tm.tr("settings_screen.button.save"))
         self.save_button.setIcon(IconLoader.load("save", size=32))
         self.save_button.setIconSize(QSize(32, 32))
-        self.save_button.setStyleSheet("padding: 14px 20px; font-size: 18px;")
+        self.save_button.setStyleSheet("padding: 12px 18px; font-size: 16px;")
         self.save_button.clicked.connect(self.save_and_close_clicked.emit)
         layout.addWidget(self.save_button)
 

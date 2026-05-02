@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.splitter.setStretchFactor(1, 0)  # 右は固定幅維持
 
         # 下部エリア
-        self.version_label = QLabel("v1.0.1")
+        self.version_label = QLabel("v1.0.2")
         self.version_label.setAlignment(Qt.AlignLeft)
         self.version_label.setObjectName("versionLabel")
         self.version_label.setStyleSheet("font-size: 10px; padding: 5px;")

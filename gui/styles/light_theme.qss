@@ -372,10 +372,10 @@ QMenu {
 
 QMenu::item {
     background-color: transparent;
-    padding: 14px 20px;
+    padding: 12px 18px;
     border-radius: 4px;
     color: #495057;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 QMenu::icon {

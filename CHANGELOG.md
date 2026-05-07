@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added NoScrollComboBox and NoScrollSlider custom widgets to prevent accidental changes via mouse wheel
+- Added toolbar drag functionality to move window by dragging empty space on toolbar
+  - 5-pixel drag threshold to prevent accidental window movement
+  - Works only on empty toolbar space, buttons remain clickable
 
 ### Changed
 

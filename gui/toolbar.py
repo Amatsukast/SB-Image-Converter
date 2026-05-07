@@ -5,7 +5,7 @@
 """
 
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QPushButton, QMenu
-from PySide6.QtCore import Signal, QSize
+from PySide6.QtCore import Signal, QSize, Qt, QPoint
 from core.icon_loader import IconLoader
 from managers.translation_manager import get_translation_manager
 from managers.theme_manager import get_theme_manager
@@ -31,6 +31,8 @@ class Toolbar(QWidget):
         self.tm = get_translation_manager()
         self.theme_manager = get_theme_manager()
         self._is_playing = False
+        self._drag_start_position = None  # ドラッグ開始位置
+        self._drag_offset = None  # ウィンドウとマウスのオフセット
         self._setup_ui()
         self._create_menu()  # メニューを最初に作成して再利用
 
@@ -192,3 +194,46 @@ class Toolbar(QWidget):
         # メニューアクションのテキストを更新
         self.settings_action.setText(self.tm.tr("toolbar.settings"))
         self.about_action.setText(self.tm.tr("toolbar.about"))
+
+    def mousePressEvent(self, event):
+        """マウス押下時 - ドラッグ開始位置を記録"""
+        if event.button() == Qt.LeftButton:
+            # クリック位置にウィジェット（ボタン等）があるか確認
+            child_widget = self.childAt(event.pos())
+            # 空白部分（ボタン以外）ならドラッグ開始位置を記録
+            if child_widget is None or not isinstance(child_widget, QPushButton):
+                self._drag_start_position = event.pos()
+                self._drag_offset = None  # まだドラッグ開始していない
+                event.accept()
+                return
+        super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event):
+        """マウス移動時 - 5px以上動いたらウィンドウを移動"""
+        if self._drag_start_position is not None:
+            # 5px以上移動したかチェック
+            distance = (event.pos() - self._drag_start_position).manhattanLength()
+            if distance >= 5:
+                # 最大化状態では何もしない
+                if self.window().isMaximized():
+                    return
+
+                # 初回のみオフセットを計算
+                if self._drag_offset is None:
+                    self._drag_offset = (
+                        event.globalPosition().toPoint()
+                        - self.window().frameGeometry().topLeft()
+                    )
+
+                # ウィンドウを移動
+                self.window().move(event.globalPosition().toPoint() - self._drag_offset)
+                event.accept()
+                return
+        super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        """マウスを離した時 - ドラッグ状態をリセット"""
+        if event.button() == Qt.LeftButton:
+            self._drag_start_position = None
+            self._drag_offset = None
+        super().mouseReleaseEvent(event)

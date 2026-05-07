@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WebP、PNG、JPG、BMP形式の相互変換に対応した、Windows向けの無料オープンソース画像一括変換ツール">
+  <meta name="keywords" content="画像変換, WebP, PNG, JPG, バッチ処理, Windows, 無料">
+  <title>SB Image Converter - シンプルで高機能な画像一括変換ツール</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="app-icon-128.webp">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-brand">
+        <img src="app-icon-128.webp" alt="SB Icon" class="nav-icon">
+        <span class="nav-title">SB Image Converter</span>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/Amatsukast/SB-Image-Converter/releases/download/v1.0.2/SB-Image-Converter-v1.0.2.zip"
+          class="btn-nav">
+          <i data-lucide="download" class="icon-nav"></i>
+          ダウンロード (無料)
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-brand">
+        <img src="app-icon-128.webp" alt="SB Image Converter" class="hero-logo">
+        <div class="hero-title">SB Image Converter</div>
+      </div>
+    </div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <h1>シンプルで高機能な<br><span class="accent">画像一括変換</span>ツール</h1>
+        <p class="hero-description">
+          WebP, PNG, JPG, BMP形式の相互変換、柔軟なリサイズ、フォーマットごとの詳細な品質設定を備えた、Windows向けの無料オープンソースソフトウェアです。
+        </p>
+        <div class="hero-system-requirements">
+          <table>
+            <tr>
+              <td>OS</td>
+              <td>Windows 10 以降 (64-bit)</td>
+            </tr>
+            <tr>
+              <td>メモリ (RAM)</td>
+              <td>4GB 以上推奨</td>
+            </tr>
+            <tr>
+              <td>ディスク容量</td>
+              <td>約 150MB</td>
+            </tr>
+          </table>
+        </div>
+        <div class="hero-buttons">
+          <a href="https://github.com/Amatsukast/SB-Image-Converter/releases/download/v1.0.2/SB-Image-Converter-v1.0.2.zip"
+            class="btn-primary">
+            <i data-lucide="download" class="icon"></i>
+            ダウンロード (無料)
+          </a>
+          <a href="https://github.com/Amatsukast/SB-Image-Converter" target="_blank" class="btn-secondary">
+            <img src="github-icon.svg" alt="GitHub" class="icon">
+            GitHub
+          </a>
+        </div>
+        <p class="hero-note">
+          <i data-lucide="check" class="icon-small accent"></i>
+          インストール不要・解凍してすぐに使えます
+        </p>
+      </div>
+
+      <!-- UI Preview -->
+      <div class="hero-preview">
+        <img src="screenshots/05_main_japanese.png" alt="SB Image Converter メインインターフェース"
+          class="preview-image screenshot-img" onclick="openModal(this.src, this.alt)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="container">
+      <h2>主な機能</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="zap" class="feature-icon"></i>
+          </div>
+          <h3>多様なフォーマット変換</h3>
+          <p>WebP, PNG, JPG/JPEG, BMP形式に対応。最新のWebPへの変換でファイルサイズを大幅に削減できます。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="layers" class="feature-icon"></i>
+          </div>
+          <h3>一括バッチ処理</h3>
+          <p>ドラッグ＆ドロップで数百枚の画像を一度に追加。高速に一括変換を行い、作業時間を短縮します。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="maximize" class="feature-icon"></i>
+          </div>
+          <h3>4種のリサイズモード</h3>
+          <p>比率(%)、ピクセル指定、長辺基準、短辺基準の4つのモードから、用途に合わせて柔軟にリサイズ可能です。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="sliders" class="feature-icon"></i>
+          </div>
+          <h3>詳細な品質コントロール</h3>
+          <p>WebPの圧縮メソッドや、PNGの圧縮レベル、JPGのサブサンプリングなど、フォーマット毎に最適な設定が可能です。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="settings" class="feature-icon"></i>
+          </div>
+          <h3>メタデータ管理</h3>
+          <p>カメラのExif情報やGPSデータなどのメタデータを保持するか、削除してプライバシーを保護するかを選択できます。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="monitor" class="feature-icon"></i>
+          </div>
+          <h3>ダークモード＆日本語UI</h3>
+          <p>目に優しいダークモードを搭載。また、UIは完全日本語化されており、直感的に操作できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <div class="container">
+      <h2>インターフェース</h2>
+      <div class="screenshot-grid">
+        <div class="screenshot-item">
+          <img src="screenshots/01_main_light.png" alt="ライトモード" class="screenshot-img"
+            onclick="openModal(this.src, this.alt)">
+          <p class="screenshot-caption">シンプルで直感的なインターフェース</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="screenshots/04_main_dark.png" alt="ダークモード" class="screenshot-img"
+            onclick="openModal(this.src, this.alt)">
+          <p class="screenshot-caption">目に優しいダークモード</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="screenshots/03_converting.png" alt="変換中" class="screenshot-img"
+            onclick="openModal(this.src, this.alt)">
+          <p class="screenshot-caption">リアルタイムの変換進捗表示</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to use -->
+  <section class="how-to-use">
+    <div class="container">
+      <h2>３ステップ</h2>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>画像を追加</h3>
+            <p>ドラッグ＆ドロップで変換したい画像を追加</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>形式を選択</h3>
+            <p>WebP、PNG、JPG、BMPから出力形式を選択</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>変換実行</h3>
+            <p><img src="play_circle.svg" alt="変換" class="inline-icon">ボタンで一括変換</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="download">
+    <div class="container download-container">
+      <h2>ダウンロード</h2>
+      <p class="download-version">
+        最新バージョン: 1.0.2 (2026-04-30 リリース)<br>
+        ライセンス: GNU General Public License v3.0
+      </p>
+
+      <div class="download-cta">
+        <a href="https://github.com/Amatsukast/SB-Image-Converter/releases/download/v1.0.2/SB-Image-Converter-v1.0.2.zip"
+          class="btn-primary">
+          <i data-lucide="download" class="icon"></i>
+          ダウンロード (無料)
+        </a>
+
+        <div class="download-instructions">
+          <p class="instructions-title">使い方</p>
+          <ol>
+            <li>ZIPファイルをダウンロード</li>
+            <li>任意の場所に解凍（デスクトップ、Documentsフォルダなど）</li>
+            <li>SB Image Converter.exe を実行</li>
+          </ol>
+          <p class="note">※インストール不要。解凍したフォルダはどこに置いても動作します。</p>
+        </div>
+
+        <p class="download-note">
+          ※初回起動時に「WindowsによってPCが保護されました」と表示される場合は、<br>
+          「詳細情報」→「実行」をクリックしてください。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-container">
+      <p>© 2026 Amatsukast. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://github.com/Amatsukast" target="_blank">
+          <img src="github-icon.svg" alt="GitHub" class="icon-small">
+          @Amatsukast
+        </a>
+        <a href="https://github.com/Amatsukast/SB-Image-Converter/issues" target="_blank">
+          バグ報告・要望
+        </a>
+        <a href="https://github.com/Amatsukast/SB-Image-Converter/blob/main/LICENSE" target="_blank">
+          ライセンス
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage" alt="">
+    <div id="modalCaption"></div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function openModal(src, alt) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const caption = document.getElementById('modalCaption');
+
+      modal.style.display = 'flex';
+      modalImg.src = src;
+      caption.textContent = alt;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // ESCキーでも閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+
+</html>

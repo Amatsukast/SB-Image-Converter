@@ -38,7 +38,7 @@ You can review the [source code](https://github.com/Amatsukast/SB-Image-Converte
 ## Overview
 
 <p align="center">
-  <img src="screenshots/01_main_light.png" alt="Main Interface" width="800">
+  <img src="docs/screenshots/01_main_light.png" alt="Main Interface" width="800">
 </p>
 
 SB Image Converter is a batch image processing tool with comprehensive format conversion and resizing capabilities.
@@ -92,7 +92,7 @@ Choose from 4 flexible resize options:
 ## Settings
 
 <p align="center">
-  <img src="screenshots/02_settings_light.png" alt="Settings Panel" width="800">
+  <img src="docs/screenshots/02_settings_light.png" alt="Settings Panel" width="800">
 </p>
 
 Access settings via the menu button (☰) in the top-left corner.
@@ -117,7 +117,7 @@ Access settings via the menu button (☰) in the top-left corner.
 ## How to Use
 
 <p align="center">
-  <img src="screenshots/03_converting.png" alt="Converting Images" width="800">
+  <img src="docs/screenshots/03_converting.png" alt="Converting Images" width="800">
 </p>
 
 1. **Add Images**
@@ -142,7 +142,7 @@ The application shows real-time progress including file count (e.g., "Processing
 ## Dark Mode Support
 
 <p align="center">
-  <img src="screenshots/04_main_dark.png" alt="Dark Mode" width="800">
+  <img src="docs/screenshots/04_main_dark.png" alt="Dark Mode" width="800">
 </p>
 
 Switch to Dark mode via Settings for a comfortable viewing experience in low-light environments. The theme is applied immediately and persists across sessions.
@@ -150,7 +150,7 @@ Switch to Dark mode via Settings for a comfortable viewing experience in low-lig
 ## 日本語対応
 
 <p align="center">
-  <img src="screenshots/05_main_japanese.png" alt="Japanese Interface" width="800">
+  <img src="docs/screenshots/05_main_japanese.png" alt="Japanese Interface" width="800">
 </p>
 
 SB Image Converterは日本語UIに完全対応しています。

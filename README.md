@@ -14,6 +14,21 @@ Download the latest release from the [Releases](https://github.com/Amatsukast/SB
 
 No installation required.
 
+## ⚠️ First-time Security Warning
+
+When you first run the application, Windows may display a security warning: **"Windows protected your PC"**
+
+This is normal for open-source applications downloaded from the internet.
+
+**To proceed:**
+
+1. Click **"More info"**
+2. Click **"Run anyway"**
+
+You can review the [source code](https://github.com/Amatsukast/SB-Image-Converter) anytime.
+
+**This warning only appears on the first run.**
+
 ## System Requirements
 
 - **OS**: Windows 10 or later (64-bit)
@@ -148,6 +163,21 @@ SB Image Converterは日本語UIに完全対応しています。
 - フォーマット別の詳細な品質設定
 - メタデータ（Exif情報）の保持/削除
 - ダークモード/ライトモード対応
+
+## ⚠️ 初回起動時のセキュリティ警告について
+
+初回起動時に、Windowsのセキュリティ警告が表示されることがあります：**「WindowsによってPCが保護されました」**
+
+これはインターネットからダウンロードしたオープンソースソフトウェアに対する正常な動作です。
+
+**実行方法：**
+
+1. **「詳細情報」**をクリック
+2. **「実行」**をクリック
+
+[ソースコード](https://github.com/Amatsukast/SB-Image-Converter)はいつでも確認できます。
+
+**この警告は初回のみ表示されます。**
 
 **使い方:**
 

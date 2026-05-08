@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="app-icon-128.webp">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Redirect Japanese users to Japanese version
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang.startsWith('ja') && !sessionStorage.getItem('lang-selected')) {
+      window.location.replace('index.html');
+    }
+  </script>
 </head>
 
 <body>

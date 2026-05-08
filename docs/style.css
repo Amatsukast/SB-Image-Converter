@@ -18,7 +18,9 @@ body {
   padding: 0 24px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
   line-height: 1.2;
 }
@@ -57,9 +59,18 @@ h3 {
 }
 
 .icon-small {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   vertical-align: middle;
+}
+
+.lang-switcher .icon-small {
+  vertical-align: -0.2em;
+  filter: brightness(0) saturate(100%) invert(48%) sepia(7%) saturate(928%) hue-rotate(177deg) brightness(93%) contrast(89%);
+}
+
+.lang-switcher:hover .icon-small {
+  filter: brightness(0) saturate(100%) invert(53%) sepia(33%) saturate(1043%) hue-rotate(138deg) brightness(91%) contrast(91%);
 }
 
 .inline-icon {
@@ -100,6 +111,24 @@ h3 {
 .nav-title {
   font-weight: 600;
   font-size: 1.125rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lang-switcher {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.lang-switcher:hover {
+  color: #14919b;
 }
 
 .btn-nav {

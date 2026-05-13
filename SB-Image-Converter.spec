@@ -8,6 +8,7 @@ a = Analysis(
     binaries=[],
     datas=[
         ('app_icon.ico', '.'),
+        ('app-icon.svg', '.'),
         ('icons', 'icons'),
         ('gui/styles', 'gui/styles'),
     ],

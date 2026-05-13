@@ -16,8 +16,10 @@ GNU General Public License for more details.
 
 import sys
 from pathlib import Path
-from PySide6.QtWidgets import QApplication
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QSplashScreen
+from PySide6.QtGui import QIcon, QPixmap, QPainter, QCursor
+from PySide6.QtSvg import QSvgRenderer
 from gui.main_window import MainWindow
 from managers.settings_manager import SettingsManager
 from managers.translation_manager import get_translation_manager
@@ -38,6 +40,34 @@ def main() -> None:
     if icon_path.exists():
         app.setWindowIcon(QIcon(str(icon_path)))
 
+    # Show splash screen
+    splash = None
+    svg_path = Path(__file__).parent / "app-icon.svg"
+    if svg_path.exists():
+        # Render SVG to a QPixmap for crisp display at any scale
+        splash_size = 500
+        splash_pixmap = QPixmap(splash_size, splash_size)
+        splash_pixmap.fill(Qt.transparent)
+
+        renderer = QSvgRenderer(str(svg_path))
+        painter = QPainter(splash_pixmap)
+        painter.setRenderHint(QPainter.Antialiasing)
+        renderer.render(painter)
+        painter.end()
+
+        # Get the screen where the mouse cursor is currently located
+        current_screen = app.screenAt(QCursor.pos())
+        if current_screen:
+            splash = QSplashScreen(
+                current_screen, splash_pixmap, Qt.WindowStaysOnTopHint
+            )
+        else:
+            splash = QSplashScreen(splash_pixmap, Qt.WindowStaysOnTopHint)
+
+        splash.setAttribute(Qt.WA_TranslucentBackground)
+        splash.show()
+        app.processEvents()
+
     # Load settings
     settings_manager = SettingsManager()
 
@@ -52,6 +82,9 @@ def main() -> None:
     # Show main window
     window = MainWindow()
     window.show()
+
+    if splash:
+        splash.finish(window)
 
     sys.exit(app.exec())
 

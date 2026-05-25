@@ -1,4 +1,4 @@
-23# SB Image Converter
+# SB Image Converter
 
 A simple and efficient batch image converter for Windows with format conversion and resize capabilities.
 

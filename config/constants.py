@@ -10,6 +10,7 @@ FORMAT_WEBP = "WebP"
 FORMAT_PNG = "PNG"
 FORMAT_JPG = "JPG"
 FORMAT_BMP = "BMP"
+FORMAT_TGA = "TGA"
 
 # Resize modes (internal values)
 RESIZE_MODE_RATIO = "ratio"

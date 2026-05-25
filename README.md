@@ -1,4 +1,4 @@
-# SB Image Converter
+23# SB Image Converter
 
 A simple and efficient batch image converter for Windows with format conversion and resize capabilities.
 
@@ -8,7 +8,7 @@ Download the latest release from the [Releases](https://github.com/Amatsukast/SB
 
 **How to Run:**
 
-1. Download `SB-Image-Converter-v1.0.3.zip` from Releases
+1. Download `SB-Image-Converter-v1.1.0.zip` from Releases
 2. Extract the zip file
 3. Run `SB Image Converter.exe`
 
@@ -49,6 +49,7 @@ SB Image Converter is a batch image processing tool with comprehensive format co
 - **PNG** - Lossless format with transparency support
 - **JPG/JPEG** - Universal format with adjustable quality
 - **BMP** - Uncompressed bitmap format
+- **TGA** - Truevision image format with alpha channel support
 
 ### Resize Modes
 
@@ -211,4 +212,4 @@ GitHub: [@Amatsukast](https://github.com/Amatsukast)
 
 ---
 
-**Version 1.0.3** | Released 2026-05-13
+**Version 1.1.0** | Released 2026-05-25

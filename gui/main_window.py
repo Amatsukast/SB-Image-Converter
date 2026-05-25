@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.splitter.setStretchFactor(1, 0)  # 右は固定幅維持
 
         # 下部エリア
-        self.version_label = QLabel("v1.0.3")
+        self.version_label = QLabel("v1.1.0")
         self.version_label.setAlignment(Qt.AlignLeft)
         self.version_label.setObjectName("versionLabel")
         self.version_label.setStyleSheet("font-size: 10px; padding: 5px;")
@@ -261,6 +261,7 @@ class MainWindow(QMainWindow):
             resize_edge_value=current_panel_settings.get("resize_long")
             or current_panel_settings.get("resize_short", 1920),
             output_path=current_panel_settings.get("output_path", "./converted/"),
+            tga_alpha=current_panel_settings.get("tga_alpha", True),
         )
         # 設定画面に切り替え
         self.stacked_widget.setCurrentIndex(1)
@@ -467,6 +468,7 @@ class MainWindow(QMainWindow):
             resize_edge_value=current_settings.get("resize_long")
             or current_settings.get("resize_short", 1920),
             output_path=current_settings.get("output_path", "./converted/"),
+            tga_alpha=current_settings.get("tga_alpha", True),
         )
 
     def _save_app_settings(self) -> None:

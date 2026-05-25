@@ -28,6 +28,9 @@ class AppSettings:
     jpg_subsampling: str = "4:2:2"
     jpg_progressive: bool = False
 
+    # TGA settings
+    tga_alpha: bool = True
+
     # Resize settings
     resize_enabled: bool = False
     resize_mode: str = RESIZE_MODE_RATIO

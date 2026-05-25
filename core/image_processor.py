@@ -18,6 +18,7 @@ class ImageProcessor:
             ".jpg": "JPEG",
             ".jpeg": "JPEG",
             ".bmp": "BMP",
+            ".tga": "TGA",
         }
 
     def process(
@@ -113,6 +114,8 @@ class ImageProcessor:
             self.save_as_jpg(img, output_path, settings)
         elif output_format == "BMP":
             self.save_as_bmp(img, output_path, settings)
+        elif output_format == "TGA":
+            self.save_as_tga(img, output_path, settings)
         else:
             raise ValueError(
                 translate("error.unsupported_format_processing", format=output_format)
@@ -197,6 +200,34 @@ class ImageProcessor:
             img = img.convert("RGB")
 
         img.save(output_path, format="BMP")
+
+    def save_as_tga(
+        self, img: Image.Image, output_path: Path, settings: AppSettings
+    ) -> None:
+        """Save as TGA format"""
+        if settings.tga_alpha:
+            # アルファを含める: 入力画像の透過情報に合わせて自動判定
+            if img.mode in ("RGBA", "LA"):
+                img = img.convert("RGBA")
+            elif img.mode == "P":
+                img = img.convert("RGBA")
+            else:
+                img = img.convert("RGB")
+        else:
+            # アルファを含めない: 強制的にRGB出力
+            if img.mode in ("RGBA", "LA", "P"):
+                bg_color = self.hex_to_rgb(settings.transparent_bg_color)
+                background = Image.new("RGB", img.size, bg_color)
+                if img.mode == "P":
+                    img = img.convert("RGBA")
+                background.paste(
+                    img, mask=img.split()[-1] if img.mode in ("RGBA", "LA") else None
+                )
+                img = background
+            elif img.mode != "RGB":
+                img = img.convert("RGB")
+
+        img.save(output_path, format="TGA")
 
     def hex_to_rgb(self, hex_color: str) -> tuple:
         """Convert hex color code to RGB tuple"""

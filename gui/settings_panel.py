@@ -109,12 +109,14 @@ class SettingsPanel(QWidget):
         """セクションタイトル作成"""
         label = QLabel(text)
         label.setObjectName("sectionTitle")
-        label.setStyleSheet("""
+        label.setStyleSheet(
+            """
             QLabel#sectionTitle {
                 font-size: 16px;
                 font-weight: bold;
             }
-        """)
+        """
+        )
         return label
 
     def _create_separator(self) -> QWidget:
@@ -171,11 +173,13 @@ class SettingsPanel(QWidget):
         label = QLabel(text)
         label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         label.setObjectName("noteLabel")
-        label.setStyleSheet("""
+        label.setStyleSheet(
+            """
             QLabel#noteLabel {
                 font-size: 12px;
             }
-        """)
+        """
+        )
         return label
 
     def _create_format_section(self) -> QWidget:
@@ -187,7 +191,7 @@ class SettingsPanel(QWidget):
 
         # フォーマット選択
         self.format_combo = NoScrollComboBox()
-        self.format_combo.addItems(["WebP", "PNG", "JPG", "BMP"])
+        self.format_combo.addItems(["WebP", "PNG", "JPG", "BMP", "TGA"])
         self.format_combo.currentTextChanged.connect(self._on_format_changed)
         layout.addWidget(self.format_combo)
 
@@ -199,6 +203,7 @@ class SettingsPanel(QWidget):
         self.format_stack.addWidget(self._create_png_widget())
         self.format_stack.addWidget(self._create_jpg_widget())
         self.format_stack.addWidget(self._create_bmp_widget())
+        self.format_stack.addWidget(self._create_tga_widget())
         layout.addWidget(self.format_stack)
 
         return widget
@@ -370,6 +375,24 @@ class SettingsPanel(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
         self.bmp_note = self._create_note_label(self.tm.tr("settings.bmp.no_options"))
         layout.addWidget(self.bmp_note)
+        return widget
+
+    def _create_tga_widget(self) -> QWidget:
+        """TGA設定ウィジェット"""
+        widget = QWidget()
+        layout = QVBoxLayout(widget)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(6)
+
+        self.tga_alpha = QCheckBox(self.tm.tr("settings.tga.alpha"))
+        self.tga_alpha.setChecked(True)
+        layout.addWidget(self.tga_alpha)
+
+        self.tga_alpha_note = self._create_note_label(
+            self.tm.tr("settings.tga.alpha_note")
+        )
+        layout.addWidget(self.tga_alpha_note)
+
         return widget
 
     def _create_resize_section(self) -> QWidget:
@@ -630,6 +653,8 @@ class SettingsPanel(QWidget):
             settings["jpg_quality"] = self.jpg_quality.value()
             settings["jpg_subsample"] = self.jpg_subsample.currentText()
             settings["jpg_progressive"] = self.jpg_progressive.isChecked()
+        elif format_name == "TGA":
+            settings["tga_alpha"] = self.tga_alpha.isChecked()
 
         # リサイズ設定
         if settings["resize_enabled"]:
@@ -666,6 +691,9 @@ class SettingsPanel(QWidget):
         self.jpg_quality.setValue(settings.get("jpg_quality", 90))
         self.jpg_subsample.setCurrentText(settings.get("jpg_subsampling", "4:2:2"))
         self.jpg_progressive.setChecked(settings.get("jpg_progressive", False))
+
+        # TGA
+        self.tga_alpha.setChecked(settings.get("tga_alpha", True))
 
         # リサイズ
         self.resize_enabled.setChecked(settings.get("resize_enabled", False))
@@ -723,6 +751,10 @@ class SettingsPanel(QWidget):
 
         # BMP
         self.bmp_note.setText(self.tm.tr("settings.bmp.no_options"))
+
+        # TGA
+        self.tga_alpha.setText(self.tm.tr("settings.tga.alpha"))
+        self.tga_alpha_note.setText(self.tm.tr("settings.tga.alpha_note"))
 
         # リサイズ
         self.resize_enabled.setText(self.tm.tr("settings.resize.enable"))

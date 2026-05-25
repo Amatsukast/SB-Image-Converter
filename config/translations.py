@@ -58,6 +58,7 @@ TRANSLATIONS = {
         "settings.format.png": "PNG",
         "settings.format.jpg": "JPG",
         "settings.format.bmp": "BMP",
+        "settings.format.tga": "TGA",
         # ========================================
         # Settings Panel - WebP Options
         # ========================================
@@ -86,6 +87,11 @@ TRANSLATIONS = {
         # Settings Panel - BMP Options
         # ========================================
         "settings.bmp.no_options": "設定項目なし",
+        # ========================================
+        # Settings Panel - TGA Options
+        # ========================================
+        "settings.tga.alpha": "アルファチャンネルを含める",
+        "settings.tga.alpha_note": "オフの場合、RGBのみ出力\n（透過部分は設定の背景色で塗りつぶし）",
         # ========================================
         # Settings Panel - Resize Options
         # ========================================
@@ -163,11 +169,11 @@ TRANSLATIONS = {
         "dialog.select_folder": "フォルダを選択",
         "dialog.select_files": "画像ファイルを選択（複数選択可）",
         "dialog.select_output_folder": "出力先フォルダを選択",
-        "dialog.file_filter": "画像ファイル (*.webp *.png *.jpg *.jpeg *.bmp);;すべてのファイル (*.*)",
+        "dialog.file_filter": "画像ファイル (*.webp *.png *.jpg *.jpeg *.bmp *.tga);;すべてのファイル (*.*)",
         "dialog.clear_all.message": "すべてのファイルを削除しますか？",
         "dialog.output_folder.title": "出力先フォルダを選択",
         "dialog.about.title": "バージョン情報",
-        "dialog.about.version": "Version 1.0.3",
+        "dialog.about.version": "Version 1.1.0",
         "dialog.about.description": "シンプルで効率的なバッチ画像変換ツール",
         "dialog.about.license": "License: GNU General Public License v3.0",
         "dialog.about.author": "© 2026 Amatsukast",
@@ -284,6 +290,7 @@ TRANSLATIONS = {
         "settings.format.png": "PNG",
         "settings.format.jpg": "JPG",
         "settings.format.bmp": "BMP",
+        "settings.format.tga": "TGA",
         # ========================================
         # Settings Panel - WebP Options
         # ========================================
@@ -312,6 +319,11 @@ TRANSLATIONS = {
         # Settings Panel - BMP Options
         # ========================================
         "settings.bmp.no_options": "No options available",
+        # ========================================
+        # Settings Panel - TGA Options
+        # ========================================
+        "settings.tga.alpha": "Include Alpha Channel",
+        "settings.tga.alpha_note": "If disabled, outputs RGB only\n(transparent areas filled with background color)",
         # ========================================
         # Settings Panel - Resize Options
         # ========================================
@@ -389,11 +401,11 @@ TRANSLATIONS = {
         "dialog.select_folder": "Select Folder",
         "dialog.select_files": "Select Image Files (Multiple Selection)",
         "dialog.select_output_folder": "Select Output Folder",
-        "dialog.file_filter": "Image Files (*.webp *.png *.jpg *.jpeg *.bmp);;All Files (*.*)",
+        "dialog.file_filter": "Image Files (*.webp *.png *.jpg *.jpeg *.bmp *.tga);;All Files (*.*)",
         "dialog.clear_all.message": "Remove all files?",
         "dialog.output_folder.title": "Select Output Folder",
         "dialog.about.title": "About",
-        "dialog.about.version": "Version 1.0.3",
+        "dialog.about.version": "Version 1.1.0",
         "dialog.about.description": "A simple and efficient batch image converter",
         "dialog.about.license": "License: GNU General Public License v3.0",
         "dialog.about.author": "© 2026 Amatsukast",

@@ -14,10 +14,10 @@ class Validators:
     """Validation class"""
 
     # 対応フォーマット
-    SUPPORTED_FORMATS = {".webp", ".png", ".jpg", ".jpeg", ".bmp"}
+    SUPPORTED_FORMATS = {".webp", ".png", ".jpg", ".jpeg", ".bmp", ".tga"}
 
     # 出力フォーマット
-    OUTPUT_FORMATS = {"WebP", "PNG", "JPG", "BMP"}
+    OUTPUT_FORMATS = {"WebP", "PNG", "JPG", "BMP", "TGA"}
 
     @classmethod
     def is_supported_format(cls, file_path: Path) -> bool:

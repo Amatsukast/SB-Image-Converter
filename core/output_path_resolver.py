@@ -43,6 +43,7 @@ class OutputPathResolver:
             "PNG": ".png",
             "JPG": ".jpg",
             "BMP": ".bmp",
+            "TGA": ".tga",
         }
         output_ext = ext_map.get(output_format, ".png")
 

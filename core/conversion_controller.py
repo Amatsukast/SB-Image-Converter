@@ -247,6 +247,9 @@ class ConversionController(QObject):
         # Output path
         app_settings.output_path = settings.get("output_path", "./converted/")
 
+        # TGA settings
+        app_settings.tga_alpha = settings.get("tga_alpha", True)
+
         # Other settings (using default values, configurable in future settings screen)
         app_settings.keep_metadata = False
         app_settings.transparent_bg_color = "#FFFFFF"

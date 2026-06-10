@@ -171,6 +171,7 @@ class FileListWidget(QWidget):
         super().__init__()
         self.tm = get_translation_manager()
         self.theme_manager = get_theme_manager()
+        self._locked = False  # 変換中のロック状態（D&D・右クリックを抑止）
         self._setup_ui()
 
         # 言語切り替えに対応
@@ -271,13 +272,30 @@ class FileListWidget(QWidget):
             selected_rows.add(index.row())
         return sorted(selected_rows)
 
+    def set_locked(self, locked: bool) -> None:
+        """ロック状態を設定（変換中のファイル操作を抑止）
+
+        ドラッグ&ドロップとコンテキストメニューを無効化する。
+        一覧の閲覧・スクロールは引き続き可能。
+        """
+        self._locked = locked
+        self.tree_view.setAcceptDrops(not locked)
+        self.setAcceptDrops(not locked)
+
     def dragEnterEvent(self, event: QDragEnterEvent):
         """ドラッグ開始"""
+        if self._locked:
+            event.ignore()
+            return
         if event.mimeData().hasUrls():
             event.acceptProposedAction()
 
     def dropEvent(self, event: QDropEvent):
         """ドロップ受付"""
+        if self._locked:
+            event.ignore()
+            return
+
         mime_data: QMimeData = event.mimeData()
 
         if mime_data.hasUrls():
@@ -292,6 +310,10 @@ class FileListWidget(QWidget):
 
     def _show_context_menu(self, position) -> None:
         """コンテキストメニュー表示"""
+        # 変換中はファイル操作を抑止
+        if self._locked:
+            return
+
         selected_indices = self.get_selected_indices()
         has_files = self.model.rowCount() > 0
 

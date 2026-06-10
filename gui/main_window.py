@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.splitter.setStretchFactor(1, 0)  # 右は固定幅維持
 
         # 下部エリア
-        self.version_label = QLabel("v1.1.0")
+        self.version_label = QLabel("v1.1.1")
         self.version_label.setAlignment(Qt.AlignLeft)
         self.version_label.setObjectName("versionLabel")
         self.version_label.setStyleSheet("font-size: 10px; padding: 5px;")
@@ -341,6 +341,10 @@ class MainWindow(QMainWindow):
 
     def _on_status_message(self, message: str) -> None:
         """ステータスメッセージ更新"""
+        # ファイル一覧が変更された（追加/削除/全削除）タイミングなので、
+        # 変換中でなければ進捗バーを初期状態に戻す
+        if not self.conversion_worker.isRunning():
+            self.progress_bar.setValue(0)
         self.status_label.setText(message)
 
     def _on_progress_updated(self, current: int, total: int) -> None:
@@ -351,10 +355,22 @@ class MainWindow(QMainWindow):
             self.tm.tr("status.processing", current=current, total=total)
         )
 
+    def _set_ui_locked(self, locked: bool) -> None:
+        """変換中のUIロックを切り替え
+
+        再生（一時停止）ボタンとウィンドウの閉じるボタン以外を操作不可にする。
+        閉じるボタンはOS標準のため対象外（closeEventで終了確認を行う）。
+        """
+        self.toolbar.set_controls_enabled(not locked)
+        self.file_list_widget.set_locked(locked)
+        self.settings_panel.setEnabled(not locked)
+
     def _on_conversion_started(self) -> None:
         """変換開始"""
         # ツールバーの再生ボタンを一時停止アイコンに
         self.toolbar.set_playing_state(True)
+        # 再生ボタン以外のUIをロック
+        self._set_ui_locked(True)
 
     def _on_conversion_completed(self, summary: dict) -> None:
         """変換完了"""
@@ -407,6 +423,8 @@ class MainWindow(QMainWindow):
 
         # ツールバーの再生ボタンを再生アイコンに戻す
         self.toolbar.set_playing_state(False)
+        # UIロックを解除
+        self._set_ui_locked(False)
 
     def _on_pause(self) -> None:
         """一時停止処理"""

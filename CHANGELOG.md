@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-06-10
+
+### Fixed
+
+- Locked the UI during conversion so that only the pause button and the window close button remain operational
+  - Disabled the menu, add files, add folder, and clear all buttons while converting
+  - Blocked drag & drop and the file list context menu while converting
+  - Previously these controls (including "Clear all") were still active during conversion, which could disrupt an in-progress batch
+
+### Changed
+
+- Reset the progress bar to its initial state when the file list changes (add / remove / clear all)
+  - The progress bar no longer stays full (green) after a completed conversion once the file list is modified
+  - Reset is suppressed while a conversion is running
+
 ## [1.1.0] - 2026-05-25
 
 ### Added
@@ -80,6 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Context menu for file list management
 - Comprehensive unit tests (49 tests, 97% coverage for validators)
 
+[1.1.1]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.1
 [1.1.0]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.0
 [1.0.3]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.0.3
 [1.0.2]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.0.2

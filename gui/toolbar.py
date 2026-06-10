@@ -130,6 +130,17 @@ class Toolbar(QWidget):
                 )
                 self.play_button.setToolTip(self.tm.tr("toolbar.start"))
 
+    def set_controls_enabled(self, enabled: bool) -> None:
+        """再生ボタン以外の操作ボタンの有効/無効を切り替え
+
+        変換中はメニュー・ファイル追加・フォルダ追加・全削除を無効化し、
+        再生（一時停止）ボタンのみ操作可能にするために使用する。
+        """
+        self.menu_button.setEnabled(enabled)
+        self.files_button.setEnabled(enabled)
+        self.folder_button.setEnabled(enabled)
+        self.trash_button.setEnabled(enabled)
+
     def _create_menu(self) -> None:
         """メニューを作成（初回のみ、再利用）"""
         self.menu = QMenu(self)

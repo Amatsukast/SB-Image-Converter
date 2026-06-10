@@ -8,7 +8,7 @@ Download the latest release from the [Releases](https://github.com/Amatsukast/SB
 
 **How to Run:**
 
-1. Download `SB-Image-Converter-v1.1.0.zip` from Releases
+1. Download `SB-Image-Converter-v1.1.1.zip` from Releases
 2. Extract the zip file
 3. Run `SB Image Converter.exe`
 
@@ -138,6 +138,8 @@ Access settings via the menu button (☰) in the top-left corner.
    - Use **Pause** (⏸️) to pause/resume
    - Right-click on files to remove them from the list
 
+During conversion the file list controls are locked—only the pause button and the window close button remain available—so an in-progress batch cannot be disrupted. Modifying the file list (add / remove / clear all) resets the progress bar to its initial state.
+
 The application shows real-time progress including file count (e.g., "Processing: 6 / 10") and displays detailed information for each file (resolution, size, modification date).
 
 ## Dark Mode Support
@@ -212,4 +214,4 @@ GitHub: [@Amatsukast](https://github.com/Amatsukast)
 
 ---
 
-**Version 1.1.0** | Released 2026-05-25
+**Version 1.1.1** | Released 2026-06-10

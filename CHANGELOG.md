@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-12
+
+### Added
+
+- Transparency fill option for alpha-capable formats (PNG / WebP / TGA)
+  - New "Transparency Fill" section in the settings screen: fill color picker plus per-format checkboxes
+  - When enabled, transparent areas are composited onto the configured fill color (useful for white-background product images, documents, ML datasets, etc.)
+- TGA RLE compression option in the format panel (default: off / uncompressed)
+
+### Changed
+
+- TGA alpha control moved from the format panel to the settings screen "Transparency Fill" section
+  - Existing `tga_alpha` setting is migrated automatically (inverted to `tga_flatten`)
+- TGA output now uses 24-bit RGB for palette images without transparency (previously always 32-bit RGBA when alpha was enabled)
+- BMP output now composites transparent areas onto the fill color, unified with JPG/TGA behavior (previously the alpha channel was simply dropped, exposing hidden colors); palette/grayscale images without transparency are still saved as 8-bit
+- Generalized the fill color setting label (was described as JPG-only)
+
+### Fixed
+
+- Settings screen values were not applied during conversion:
+  - Fill color was hardcoded to white regardless of the configured color
+  - "Keep metadata" was always off
+  - "When file exists: Overwrite" was always treated as "save with numbering suffix"
+
 ## [1.1.1] - 2026-06-10
 
 ### Fixed
@@ -95,6 +119,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Context menu for file list management
 - Comprehensive unit tests (49 tests, 97% coverage for validators)
 
+[1.2.0]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.2.0
 [1.1.1]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.1
 [1.1.0]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.0
 [1.0.3]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.0.3

@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.splitter.setStretchFactor(1, 0)  # 右は固定幅維持
 
         # 下部エリア
-        self.version_label = QLabel("v1.1.1")
+        self.version_label = QLabel("v1.2.0")
         self.version_label.setAlignment(Qt.AlignLeft)
         self.version_label.setObjectName("versionLabel")
         self.version_label.setStyleSheet("font-size: 10px; padding: 5px;")
@@ -208,6 +208,14 @@ class MainWindow(QMainWindow):
         # 変換実行（バックグラウンドスレッド）
         file_list = self.file_manager.get_files()
         settings = self.settings_panel.get_settings()
+        # 設定画面（アプリ設定）の値をマージして変換パイプラインへ渡す
+        app_settings = self.settings_manager.settings
+        settings["transparent_bg_color"] = app_settings.transparent_bg_color
+        settings["keep_metadata"] = app_settings.keep_metadata
+        settings["overwrite"] = app_settings.overwrite_mode
+        settings["png_flatten"] = app_settings.png_flatten
+        settings["webp_flatten"] = app_settings.webp_flatten
+        settings["tga_flatten"] = app_settings.tga_flatten
         self.conversion_worker.set_task(file_list, settings)
         self.conversion_worker.start()
 
@@ -261,7 +269,7 @@ class MainWindow(QMainWindow):
             resize_edge_value=current_panel_settings.get("resize_long")
             or current_panel_settings.get("resize_short", 1920),
             output_path=current_panel_settings.get("output_path", "./converted/"),
-            tga_alpha=current_panel_settings.get("tga_alpha", True),
+            tga_rle=current_panel_settings.get("tga_rle", False),
         )
         # 設定画面に切り替え
         self.stacked_widget.setCurrentIndex(1)
@@ -486,7 +494,7 @@ class MainWindow(QMainWindow):
             resize_edge_value=current_settings.get("resize_long")
             or current_settings.get("resize_short", 1920),
             output_path=current_settings.get("output_path", "./converted/"),
-            tga_alpha=current_settings.get("tga_alpha", True),
+            tga_rle=current_settings.get("tga_rle", False),
         )
 
     def _save_app_settings(self) -> None:
@@ -500,6 +508,9 @@ class MainWindow(QMainWindow):
             overwrite_mode=app_settings.get("overwrite_mode", False),
             keep_metadata=app_settings.get("keep_metadata", False),
             transparent_bg_color=app_settings.get("transparent_bg_color", "#FFFFFF"),
+            png_flatten=app_settings.get("png_flatten", False),
+            webp_flatten=app_settings.get("webp_flatten", False),
+            tga_flatten=app_settings.get("tga_flatten", False),
         )
 
         # Update file manager settings

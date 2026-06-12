@@ -90,8 +90,9 @@ TRANSLATIONS = {
         # ========================================
         # Settings Panel - TGA Options
         # ========================================
-        "settings.tga.alpha": "アルファチャンネルを含める",
-        "settings.tga.alpha_note": "オフの場合、RGBのみ出力\n（透過部分は設定の背景色で塗りつぶし）",
+        "settings.tga.rle": "RLE圧縮",
+        "settings.tga.rle_enable": "有効",
+        "settings.tga.rle_note": "ベタ塗りの多い画像でサイズ削減\n（古いツールでは読み込めない場合あり）",
         # ========================================
         # Settings Panel - Resize Options
         # ========================================
@@ -140,8 +141,11 @@ TRANSLATIONS = {
         "settings_screen.behavior.overwrite_yes": "上書きする",
         "settings_screen.image_processing": "画像処理",
         "settings_screen.image_processing.keep_metadata": "メタデータ（Exif等）を保持する",
-        "settings_screen.image_processing.bg_color_label": "透過画像のJPG変換時の背景色",
-        "settings_screen.image_processing.bg_color_dialog": "背景色を選択",
+        "settings_screen.image_processing.flatten_section": "透過部分の塗りつぶし",
+        "settings_screen.image_processing.bg_color_label": "塗りつぶし色",
+        "settings_screen.image_processing.bg_color_dialog": "塗りつぶし色を選択",
+        "settings_screen.image_processing.flatten_formats_label": "塗りつぶす形式",
+        "settings_screen.image_processing.flatten_note": "JPG・BMPは透過非対応のため、常にこの色で塗りつぶされます",
         "settings_screen.button.reset": " デフォルトに戻す",
         "settings_screen.button.cancel": " キャンセル",
         "settings_screen.button.save": " 保存して閉じる",
@@ -173,7 +177,7 @@ TRANSLATIONS = {
         "dialog.clear_all.message": "すべてのファイルを削除しますか？",
         "dialog.output_folder.title": "出力先フォルダを選択",
         "dialog.about.title": "バージョン情報",
-        "dialog.about.version": "Version 1.1.1",
+        "dialog.about.version": "Version 1.2.0",
         "dialog.about.description": "シンプルで効率的なバッチ画像変換ツール",
         "dialog.about.license": "License: GNU General Public License v3.0",
         "dialog.about.author": "© 2026 Amatsukast",
@@ -322,8 +326,9 @@ TRANSLATIONS = {
         # ========================================
         # Settings Panel - TGA Options
         # ========================================
-        "settings.tga.alpha": "Include Alpha Channel",
-        "settings.tga.alpha_note": "If disabled, outputs RGB only\n(transparent areas filled with background color)",
+        "settings.tga.rle": "RLE Compression",
+        "settings.tga.rle_enable": "Enable",
+        "settings.tga.rle_note": "Reduces file size for images with flat colors\n(some older tools may not read RLE files)",
         # ========================================
         # Settings Panel - Resize Options
         # ========================================
@@ -372,8 +377,11 @@ TRANSLATIONS = {
         "settings_screen.behavior.overwrite_yes": "Overwrite",
         "settings_screen.image_processing": "Image Processing",
         "settings_screen.image_processing.keep_metadata": "Keep metadata (Exif, etc.)",
-        "settings_screen.image_processing.bg_color_label": "Background color for transparent images when converting to JPG",
-        "settings_screen.image_processing.bg_color_dialog": "Select background color",
+        "settings_screen.image_processing.flatten_section": "Transparency Fill",
+        "settings_screen.image_processing.bg_color_label": "Fill color",
+        "settings_screen.image_processing.bg_color_dialog": "Select fill color",
+        "settings_screen.image_processing.flatten_formats_label": "Fill transparency for",
+        "settings_screen.image_processing.flatten_note": "JPG and BMP do not support transparency and are always filled with this color",
         "settings_screen.button.reset": " Reset to Defaults",
         "settings_screen.button.cancel": " Cancel",
         "settings_screen.button.save": " Save and Close",
@@ -405,7 +413,7 @@ TRANSLATIONS = {
         "dialog.clear_all.message": "Remove all files?",
         "dialog.output_folder.title": "Select Output Folder",
         "dialog.about.title": "About",
-        "dialog.about.version": "Version 1.1.1",
+        "dialog.about.version": "Version 1.2.0",
         "dialog.about.description": "A simple and efficient batch image converter",
         "dialog.about.license": "License: GNU General Public License v3.0",
         "dialog.about.author": "© 2026 Amatsukast",

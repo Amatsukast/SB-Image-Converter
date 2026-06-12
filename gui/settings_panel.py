@@ -384,14 +384,19 @@ class SettingsPanel(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(6)
 
-        self.tga_alpha = QCheckBox(self.tm.tr("settings.tga.alpha"))
-        self.tga_alpha.setChecked(True)
-        layout.addWidget(self.tga_alpha)
+        self.tga_rle_label = QLabel(self.tm.tr("settings.tga.rle"))
+        self.tga_rle_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        layout.addWidget(self.tga_rle_label)
 
-        self.tga_alpha_note = self._create_note_label(
-            self.tm.tr("settings.tga.alpha_note")
-        )
-        layout.addWidget(self.tga_alpha_note)
+        self.tga_rle = QCheckBox(self.tm.tr("settings.tga.rle_enable"))
+        self.tga_rle.setChecked(False)
+        layout.addWidget(self.tga_rle)
+
+        self.tga_rle_note = self._create_note_label(self.tm.tr("settings.tga.rle_note"))
+        layout.addWidget(self.tga_rle_note)
+
+        # 余剰スペースを下に逃がし、項目間隔を他フォーマットと統一する
+        layout.addStretch()
 
         return widget
 
@@ -654,7 +659,7 @@ class SettingsPanel(QWidget):
             settings["jpg_subsample"] = self.jpg_subsample.currentText()
             settings["jpg_progressive"] = self.jpg_progressive.isChecked()
         elif format_name == "TGA":
-            settings["tga_alpha"] = self.tga_alpha.isChecked()
+            settings["tga_rle"] = self.tga_rle.isChecked()
 
         # リサイズ設定
         if settings["resize_enabled"]:
@@ -693,7 +698,7 @@ class SettingsPanel(QWidget):
         self.jpg_progressive.setChecked(settings.get("jpg_progressive", False))
 
         # TGA
-        self.tga_alpha.setChecked(settings.get("tga_alpha", True))
+        self.tga_rle.setChecked(settings.get("tga_rle", False))
 
         # リサイズ
         self.resize_enabled.setChecked(settings.get("resize_enabled", False))
@@ -753,8 +758,9 @@ class SettingsPanel(QWidget):
         self.bmp_note.setText(self.tm.tr("settings.bmp.no_options"))
 
         # TGA
-        self.tga_alpha.setText(self.tm.tr("settings.tga.alpha"))
-        self.tga_alpha_note.setText(self.tm.tr("settings.tga.alpha_note"))
+        self.tga_rle_label.setText(self.tm.tr("settings.tga.rle"))
+        self.tga_rle.setText(self.tm.tr("settings.tga.rle_enable"))
+        self.tga_rle_note.setText(self.tm.tr("settings.tga.rle_note"))
 
         # リサイズ
         self.resize_enabled.setText(self.tm.tr("settings.resize.enable"))

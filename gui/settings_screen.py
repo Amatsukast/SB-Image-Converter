@@ -253,26 +253,53 @@ class SettingsScreen(QWidget):
         layout.addWidget(self.keep_metadata_checkbox)
         layout.addSpacing(24)
 
-        # 透過背景色
-        bg_section = QVBoxLayout()
-        bg_section.setSpacing(8)
+        # 透過部分の塗りつぶし
+        flatten_section = QVBoxLayout()
+        flatten_section.setSpacing(8)
+        self.flatten_section_label = QLabel(
+            self.tm.tr("settings_screen.image_processing.flatten_section")
+        )
+        self.flatten_section_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        flatten_section.addWidget(self.flatten_section_label)
+
+        # 塗りつぶし色
+        bg_layout = QHBoxLayout()
+        bg_layout.setSpacing(12)
         self.bg_label = QLabel(
             self.tm.tr("settings_screen.image_processing.bg_color_label")
         )
-        self.bg_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        bg_section.addWidget(self.bg_label)
-
-        bg_layout = QHBoxLayout()
+        bg_layout.addWidget(self.bg_label)
         self.bg_color_button = QPushButton()
         self.bg_color_button.setFixedSize(60, 30)
         self.bg_color_button.clicked.connect(self._on_bg_color_clicked)
         self._current_bg_color = "#FFFFFF"
         self._update_bg_color_button()
-
         bg_layout.addWidget(self.bg_color_button)
         bg_layout.addStretch()
-        bg_section.addLayout(bg_layout)
-        layout.addLayout(bg_section)
+        flatten_section.addLayout(bg_layout)
+
+        # 塗りつぶす形式（アルファ対応形式のみ選択可、JPG/BMPは常時塗りつぶし）
+        formats_layout = QHBoxLayout()
+        formats_layout.setSpacing(16)
+        self.flatten_formats_label = QLabel(
+            self.tm.tr("settings_screen.image_processing.flatten_formats_label")
+        )
+        formats_layout.addWidget(self.flatten_formats_label)
+        self.flatten_png = QCheckBox("PNG")
+        self.flatten_webp = QCheckBox("WebP")
+        self.flatten_tga = QCheckBox("TGA")
+        formats_layout.addWidget(self.flatten_png)
+        formats_layout.addWidget(self.flatten_webp)
+        formats_layout.addWidget(self.flatten_tga)
+        formats_layout.addStretch()
+        flatten_section.addLayout(formats_layout)
+
+        self.flatten_note = _create_note_label(
+            self.tm.tr("settings_screen.image_processing.flatten_note")
+        )
+        flatten_section.addWidget(self.flatten_note)
+
+        layout.addLayout(flatten_section)
 
         return widget
 
@@ -304,6 +331,9 @@ class SettingsScreen(QWidget):
             "overwrite_mode": self.overwrite_yes.isChecked(),
             "keep_metadata": self.keep_metadata_checkbox.isChecked(),
             "transparent_bg_color": self._current_bg_color,
+            "png_flatten": self.flatten_png.isChecked(),
+            "webp_flatten": self.flatten_webp.isChecked(),
+            "tga_flatten": self.flatten_tga.isChecked(),
         }
 
     def load_settings(self, settings: dict) -> None:
@@ -332,9 +362,12 @@ class SettingsScreen(QWidget):
         # メタデータ保持
         self.keep_metadata_checkbox.setChecked(settings.get("keep_metadata", False))
 
-        # 背景色
+        # 透過部分の塗りつぶし
         self._current_bg_color = settings.get("transparent_bg_color", "#FFFFFF")
         self._update_bg_color_button()
+        self.flatten_png.setChecked(settings.get("png_flatten", False))
+        self.flatten_webp.setChecked(settings.get("webp_flatten", False))
+        self.flatten_tga.setChecked(settings.get("tga_flatten", False))
 
     def _reload_icons(self) -> None:
         """テーマ切り替え時にアイコンを再読み込み"""
@@ -393,8 +426,17 @@ class SettingsScreen(QWidget):
         self.keep_metadata_checkbox.setText(
             self.tm.tr("settings_screen.image_processing.keep_metadata")
         )
+        self.flatten_section_label.setText(
+            self.tm.tr("settings_screen.image_processing.flatten_section")
+        )
         self.bg_label.setText(
             self.tm.tr("settings_screen.image_processing.bg_color_label")
+        )
+        self.flatten_formats_label.setText(
+            self.tm.tr("settings_screen.image_processing.flatten_formats_label")
+        )
+        self.flatten_note.setText(
+            self.tm.tr("settings_screen.image_processing.flatten_note")
         )
 
         # ボタンエリア

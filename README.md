@@ -8,7 +8,7 @@ Download the latest release from the [Releases](https://github.com/Amatsukast/SB
 
 **How to Run:**
 
-1. Download `SB-Image-Converter-v1.1.1.zip` from Releases
+1. Download `SB-Image-Converter-v1.2.0.zip` from Releases
 2. Extract the zip file
 3. Run `SB Image Converter.exe`
 
@@ -82,8 +82,13 @@ Choose from 4 flexible resize options:
 - Subsampling: 4:4:4 (best quality) / 4:2:2 / 4:2:0 (smallest size)
 - Progressive: Enable for progressive loading on web
 
+**TGA Settings:**
+
+- RLE Compression: Enable to reduce file size for images with flat colors (some older tools may not read RLE files)
+
 ### Additional Features
 
+- **Transparency Fill**: Fill transparent areas with a configurable color — always applied for JPG/BMP (no alpha support), optional per format for PNG/WebP/TGA
 - **Metadata Management**: Choose to keep or remove EXIF data (camera info, GPS, etc.)
 - **Drag & Drop**: Simply drag images into the window
 - **Batch Processing**: Convert hundreds of images at once
@@ -113,7 +118,7 @@ Access settings via the menu button (☰) in the top-left corner.
 ### Image Processing
 
 - **Keep metadata (Exif, etc.)**: Preserve camera information, GPS data, and other metadata
-- **Background color for transparent images when converting to JPG**: Set the background color for images with transparency (default: white)
+- **Transparency Fill**: Set the fill color for transparent areas (default: white) and choose which alpha-capable formats (PNG / WebP / TGA) should be filled. JPG and BMP do not support transparency and are always filled with this color
 
 ## How to Use
 
@@ -127,7 +132,7 @@ Access settings via the menu button (☰) in the top-left corner.
    - Click the image icon (🖼️) to add individual images
 
 2. **Configure Settings**
-   - Select **Output Format** (WebP/PNG/JPG/BMP)
+   - Select **Output Format** (WebP/PNG/JPG/BMP/TGA)
    - Adjust **Quality** slider for the selected format
    - Enable **Resize** if needed and choose resize mode
    - Set **Output Path** (leave blank for default `./converted/`)
@@ -160,10 +165,11 @@ SB Image Converterは日本語UIに完全対応しています。
 
 **主な機能:**
 
-- WebP、PNG、JPG、BMP形式の相互変換
+- WebP、PNG、JPG、BMP、TGA形式の相互変換
 - 一括変換機能（ドラッグ&ドロップ対応）
 - 4種類のリサイズモード（比率、ピクセル指定、長辺基準、短辺基準）
 - フォーマット別の詳細な品質設定
+- 透過部分の塗りつぶし（色指定、PNG/WebP/TGAは形式ごとに選択可）
 - メタデータ（Exif情報）の保持/削除
 - ダークモード/ライトモード対応
 
@@ -214,4 +220,4 @@ GitHub: [@Amatsukast](https://github.com/Amatsukast)
 
 ---
 
-**Version 1.1.1** | Released 2026-06-10
+**Version 1.2.0** | Released 2026-06-12

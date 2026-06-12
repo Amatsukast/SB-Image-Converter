@@ -125,6 +125,9 @@ class ImageProcessor:
         self, img: Image.Image, output_path: Path, settings: AppSettings
     ) -> None:
         """Save as WebP format"""
+        if settings.webp_flatten:
+            img = self.flatten_alpha(img, settings)
+
         quality = settings.webp_quality
         lossless = quality == 100
 
@@ -146,6 +149,9 @@ class ImageProcessor:
         self, img: Image.Image, output_path: Path, settings: AppSettings
     ) -> None:
         """Save as PNG format"""
+        if settings.png_flatten:
+            img = self.flatten_alpha(img, settings)
+
         compress_level = max(0, min(9, settings.png_compress_level))
 
         save_kwargs = {
@@ -159,20 +165,30 @@ class ImageProcessor:
 
         img.save(output_path, **save_kwargs)
 
+    def flatten_alpha(self, img: Image.Image, settings: AppSettings) -> Image.Image:
+        """透過情報を持つ画像(RGBA/LA/透過パレット)を背景色に合成してRGB化
+
+        透過情報を持たない画像はそのまま返す（モード変換しない）。
+        """
+        has_transparency = img.mode in ("RGBA", "LA") or (
+            img.mode == "P" and "transparency" in img.info
+        )
+        if not has_transparency:
+            return img
+
+        bg_color = self.hex_to_rgb(settings.transparent_bg_color)
+        background = Image.new("RGB", img.size, bg_color)
+        if img.mode == "P":
+            img = img.convert("RGBA")
+        background.paste(img, mask=img.split()[-1])
+        return background
+
     def save_as_jpg(
         self, img: Image.Image, output_path: Path, settings: AppSettings
     ) -> None:
         """Save as JPG format"""
-        if img.mode in ("RGBA", "LA", "P"):
-            bg_color = self.hex_to_rgb(settings.transparent_bg_color)
-            background = Image.new("RGB", img.size, bg_color)
-            if img.mode == "P":
-                img = img.convert("RGBA")
-            background.paste(
-                img, mask=img.split()[-1] if img.mode in ("RGBA", "LA") else None
-            )
-            img = background
-        elif img.mode != "RGB":
+        img = self.flatten_alpha(img, settings)
+        if img.mode != "RGB":
             img = img.convert("RGB")
 
         quality = max(0, min(100, settings.jpg_quality))
@@ -196,38 +212,31 @@ class ImageProcessor:
         self, img: Image.Image, output_path: Path, settings: AppSettings
     ) -> None:
         """Save as BMP format"""
-        if img.mode == "RGBA":
-            img = img.convert("RGB")
-
+        # 透過部分は背景色に合成（JPG/TGAと同じ挙動に統一）
+        # 透過なしのパレット(P)/グレースケール(L)はそのまま8bit BMPで保存される
+        img = self.flatten_alpha(img, settings)
         img.save(output_path, format="BMP")
 
     def save_as_tga(
         self, img: Image.Image, output_path: Path, settings: AppSettings
     ) -> None:
         """Save as TGA format"""
-        if settings.tga_alpha:
-            # アルファを含める: 入力画像の透過情報に合わせて自動判定
-            if img.mode in ("RGBA", "LA"):
-                img = img.convert("RGBA")
-            elif img.mode == "P":
+        if settings.tga_flatten:
+            # 透過部分を背景色に合成して強制的にRGB(24bit)出力
+            img = self.flatten_alpha(img, settings)
+            if img.mode != "RGB":
+                img = img.convert("RGB")
+        else:
+            # 実際に透過情報を持つ画像のみRGBA(32bit)、それ以外はRGB(24bit)
+            has_transparency = img.mode in ("RGBA", "LA") or (
+                img.mode == "P" and "transparency" in img.info
+            )
+            if has_transparency:
                 img = img.convert("RGBA")
             else:
                 img = img.convert("RGB")
-        else:
-            # アルファを含めない: 強制的にRGB出力
-            if img.mode in ("RGBA", "LA", "P"):
-                bg_color = self.hex_to_rgb(settings.transparent_bg_color)
-                background = Image.new("RGB", img.size, bg_color)
-                if img.mode == "P":
-                    img = img.convert("RGBA")
-                background.paste(
-                    img, mask=img.split()[-1] if img.mode in ("RGBA", "LA") else None
-                )
-                img = background
-            elif img.mode != "RGB":
-                img = img.convert("RGB")
 
-        img.save(output_path, format="TGA")
+        img.save(output_path, format="TGA", rle=settings.tga_rle)
 
     def hex_to_rgb(self, hex_color: str) -> tuple:
         """Convert hex color code to RGB tuple"""

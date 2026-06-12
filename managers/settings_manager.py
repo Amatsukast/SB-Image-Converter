@@ -1,7 +1,7 @@
 import json
 import sys
 from pathlib import Path
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, fields
 from config.constants import (
     RESIZE_MODE_RATIO,
     DEFAULT_OUTPUT_PATH,
@@ -29,7 +29,12 @@ class AppSettings:
     jpg_progressive: bool = False
 
     # TGA settings
-    tga_alpha: bool = True
+    tga_rle: bool = False
+
+    # Transparency flatten settings (per-format, alpha-capable formats only)
+    png_flatten: bool = False
+    webp_flatten: bool = False
+    tga_flatten: bool = False
 
     # Resize settings
     resize_enabled: bool = False
@@ -74,10 +79,22 @@ class SettingsManager:
             try:
                 with open(self.settings_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
+                data = self._migrate(data)
+                # 未知のキー（旧バージョンの廃止済み設定など）は無視する
+                known_fields = {f.name for f in fields(AppSettings)}
+                data = {k: v for k, v in data.items() if k in known_fields}
                 return AppSettings(**data)
-            except (json.JSONDecodeError, FileNotFoundError, KeyError):
+            except (json.JSONDecodeError, FileNotFoundError, KeyError, TypeError):
                 return AppSettings()
         return AppSettings()
+
+    @staticmethod
+    def _migrate(data: dict) -> dict:
+        """旧バージョンの設定を現行形式に変換"""
+        # v1.1.x: tga_alpha (含める=True) → tga_flatten (塗りつぶす=True) に反転
+        if "tga_alpha" in data and "tga_flatten" not in data:
+            data["tga_flatten"] = not data["tga_alpha"]
+        return data
 
     def save(self, settings: AppSettings = None) -> None:
         if settings is None:

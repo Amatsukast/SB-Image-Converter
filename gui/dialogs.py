@@ -214,6 +214,8 @@ class ResetConfirmDialog(QDialog):
 class AboutDialog(QDialog):
     """バージョン情報ダイアログ"""
 
+    WEBSITE_URL = "https://amatsukast.github.io/SB-Image-Converter/"
+
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.tm = get_translation_manager()
@@ -255,15 +257,13 @@ class AboutDialog(QDialog):
 
         layout.addSpacing(10)
 
-        # GitHubリンク
-        github_link = QLabel(
-            '<a href="https://github.com/Amatsukast/SB-Image-Converter" style="color: #0066cc;">GitHub Repository</a>'
-        )
-        github_link.setAlignment(Qt.AlignCenter)
-        github_link.setOpenExternalLinks(True)
-        github_link.setStyleSheet("font-size: 13px;")
-        github_link.setCursor(QCursor(Qt.PointingHandCursor))
-        layout.addWidget(github_link)
+        # 公式サイトリンク（ランディングページ。リポジトリへのリンクもそこから辿れる）
+        self.website_link = QLabel(self._website_link_html())
+        self.website_link.setAlignment(Qt.AlignCenter)
+        self.website_link.setOpenExternalLinks(True)
+        self.website_link.setStyleSheet("font-size: 13px;")
+        self.website_link.setCursor(QCursor(Qt.PointingHandCursor))
+        layout.addWidget(self.website_link)
 
         # ライセンス
         self.license_label = QLabel(self.tm.tr("dialog.about.license"))
@@ -295,11 +295,19 @@ class AboutDialog(QDialog):
 
         layout.addLayout(button_layout)
 
+    def _website_link_html(self) -> str:
+        """公式サイトリンクのHTMLを生成"""
+        return (
+            f'<a href="{self.WEBSITE_URL}" style="color: #0066cc;">'
+            f"{self.tm.tr('dialog.about.website')}</a>"
+        )
+
     def refresh_ui(self) -> None:
         """言語切り替え時のUI更新"""
         self.setWindowTitle(self.tm.tr("dialog.about.title"))
         self.version_label.setText(self.tm.tr("dialog.about.version"))
         self.description.setText(self.tm.tr("dialog.about.description"))
+        self.website_link.setText(self._website_link_html())
         self.license_label.setText(self.tm.tr("dialog.about.license"))
         self.author_label.setText(self.tm.tr("dialog.about.author"))
         self.close_button.setText(self.tm.tr("dialog.about.close"))

@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-06-12
+
+### Changed
+
+- About dialog link now points to the official website (landing page) instead of the GitHub repository
+  - The repository, issues, and license remain reachable from the website
+- About dialog link label is now localized (Japanese: 公式サイト / English: Official Website) and follows language switching
+
 ## [1.2.0] - 2026-06-12
 
 ### Added
@@ -119,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Context menu for file list management
 - Comprehensive unit tests (49 tests, 97% coverage for validators)
 
+[1.2.1]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.2.1
 [1.2.0]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.2.0
 [1.1.1]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.1
 [1.1.0]: https://github.com/Amatsukast/SB-Image-Converter/releases/tag/v1.1.0

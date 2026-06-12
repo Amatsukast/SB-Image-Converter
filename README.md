@@ -8,7 +8,7 @@ Download the latest release from the [Releases](https://github.com/Amatsukast/SB
 
 **How to Run:**
 
-1. Download `SB-Image-Converter-v1.2.0.zip` from Releases
+1. Download `SB-Image-Converter-v1.2.1.zip` from Releases
 2. Extract the zip file
 3. Run `SB Image Converter.exe`
 
@@ -220,4 +220,4 @@ GitHub: [@Amatsukast](https://github.com/Amatsukast)
 
 ---
 
-**Version 1.2.0** | Released 2026-06-12
+**Version 1.2.1** | Released 2026-06-12
